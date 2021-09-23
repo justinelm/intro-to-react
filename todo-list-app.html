@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO List app</title>
+    <style>
+      li {
+        cursor: pointer;
+      }
+    </style>
+</head>
+<body>
+    <h1 class='header-main' id='header-main'>Nice la!</h1>
+    <p id='text-content'>Hello from the other siiide~</p>
+
+    <input type='text' id='input' />
+
+    <button class='btn' id='submit-btn' onclick='changeHeader();'>
+      Submit
+    </button>
+
+    <div>
+      <ul id='list'></ul>
+      <input type='text' id='list-input' />
+      <button class='btn' id='list-btn' onclick='addToList();'>
+        Add To List
+      </button>
+    </div>
+    <script type="text/javascript" defer>
+      function changeHeader() {
+        document.getElementById('header-main').textContent = document.getElementById('input').value
+        document.getElementById('input').value = ""
+      }
+
+      const headerMain = document.getElementsByClassName('header-main')
+      // const headerMain = document.querySelectorAll('.header-main')
+      console.log(headerMain[0].textContent)
+
+      const pTag = document.getElementById('text-content')
+      console.log(pTag.innerHTML)
+
+
+      document.getElementById("list").addEventListener("click", function(e) {
+        if (e.target && e.target.matches("li.item")) {
+          // alert("clicked " + e.target.innerText);
+          e.target.remove()
+        }
+      });
+
+
+      function addToList() {
+        const inputValue = document.getElementById('list-input').value
+        if (inputValue.length < 1) return
+
+        const listItem = document.createElement('LI')
+        listItem.className = 'item';
+        listItem.title = 'Click to delete';
+        const listItemText = document.createTextNode(inputValue)
+        listItem.appendChild(listItemText)
+        document.getElementById('list').appendChild(listItem)
+        document.getElementById('list-input').value = ""
+      }
+    </script>
+</body>
+</html>
